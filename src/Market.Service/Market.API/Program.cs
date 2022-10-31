@@ -1,7 +1,9 @@
+using Market.API.Services;
 using Market.Domain;
 using Market.Domain.CQRS.AddProduct;
 using Market.Domain.CQRS.GetProduct;
 using Market.Domain.CQRS.GetProductDetail;
+using Market.Domain.CQRS.InterGetProduct;
 using Market.Domain.Interfaces;
 using Market.Infrastructure;
 using MediatR;
@@ -19,6 +21,8 @@ builder.Services.ConfigureDomain();
 
 builder.Services.AddScoped<IMarketContext, MarketDbContext>();
 
+builder.Services.AddGrpc();
+
 // Add services to the container.
 
 var app = builder.Build();
@@ -27,7 +31,9 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
-app.MapGet("api/products", async ([FromQuery] int? page, IMediator mediator) =>
+app.MapGrpcService<ProductService>();
+
+app.MapGet("/api/products", async ([FromQuery] int? page, IMediator mediator) =>
 {
   GetProductRequest request;
   if (page == null)
@@ -35,6 +41,14 @@ app.MapGet("api/products", async ([FromQuery] int? page, IMediator mediator) =>
   else
     request = new GetProductRequest(Convert.ToInt32(page));
 
+  var response = await mediator.Send(request);
+
+  return response;
+});
+
+app.MapGet("/api/inter/products/{id:int}", async ([FromRoute] int id, IMediator mediator) =>
+{
+  var request = new InterGetProductRequest(id);
   var response = await mediator.Send(request);
 
   return response;

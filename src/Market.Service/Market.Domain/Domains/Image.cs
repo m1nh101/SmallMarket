@@ -1,4 +1,6 @@
-﻿namespace Market.Domain.Domains;
+﻿using Service.Abstraction;
+
+namespace Market.Domain.Domains;
 
 public class Image : Entity
 {

@@ -8,5 +8,5 @@ public sealed record AddedProductResponse(
   double Price,
   Category Category,
   string Unit,
-  IEnumerable<StockPayload> Stocks,
+  int Stock,
   IEnumerable<string> Images);

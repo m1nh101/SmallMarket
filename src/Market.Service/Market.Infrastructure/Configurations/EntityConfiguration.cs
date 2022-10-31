@@ -1,6 +1,6 @@
-﻿using Market.Domain.Domains;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Service.Abstraction;
 
 namespace Market.Infrastucture.Configurations;
 

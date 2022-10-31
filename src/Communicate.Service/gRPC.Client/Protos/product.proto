@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "gRPC.Client.ProductClient";
+
+package product;
+
+service Product {
+	rpc GetProduct (ProductRequest) returns (ProductResponse);
+}
+
+message ProductRequest {
+	int32 productId = 1;
+}
+
+message ProductResponse {
+	bool exist = 1;
+	double price = 2;
+	int32 quantity = 3;
+}

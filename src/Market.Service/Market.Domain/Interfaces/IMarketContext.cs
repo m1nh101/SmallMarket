@@ -1,10 +1,10 @@
 ﻿using Market.Domain.Domains;
 using Microsoft.EntityFrameworkCore;
+using Service.Abstraction;
 
 namespace Market.Domain.Interfaces;
 
-public interface IMarketContext
+public interface IMarketContext : IContext
 {
-  Task Commit();
   DbSet<Product> Products { get; }
 }

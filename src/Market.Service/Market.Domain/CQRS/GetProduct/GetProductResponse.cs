@@ -9,4 +9,5 @@ public sealed record GetProductResponse(
   string Name,
   double Price,
   string Unit,
+  int Stock,
   IEnumerable<string> Images);

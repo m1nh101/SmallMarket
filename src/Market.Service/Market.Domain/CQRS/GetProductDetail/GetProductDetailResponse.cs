@@ -5,4 +5,5 @@ public sealed record GetProductDetailResponse(
   string Name,
   string Unit,
   double Price,
+  int Stock,
   IEnumerable<string> Images);

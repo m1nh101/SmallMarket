@@ -18,7 +18,7 @@ public sealed class GetProductDetailRequestHandler
   {
     var response = await _context.Products
       .Include(e => e.Images)
-      .Select(e => new GetProductDetailResponse(e.Id, e.Name, e.Unit, e.Price, e.Images.Select(d => d.Url)))
+      .Select(e => new GetProductDetailResponse(e.Id, e.Name, e.Unit, e.Price, e.Stock, e.Images.Select(d => d.Url)))
       .AsNoTracking()
       .FirstOrDefaultAsync(e => e.Id == request.Id, cancellationToken);
 

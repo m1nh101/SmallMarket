@@ -16,17 +16,14 @@ public sealed class AddProductRequestHandler
 
   public async Task<AddedProductResponse> Handle(AddProductRequest request, CancellationToken cancellationToken)
   {
-    var stocks = request.Stocks.Select(e => new Stock(e.Quantity, e.Location));
-
-    var product = new Product(request.Name, request.Unit, request.Price, request.Category)
-      .WithImages(request.Images)
-      .WithStock(stocks);
+    var product = new Product(request.Name, request.Unit, request.Price, request.Category, request.Stock)
+      .WithImages(request.Images);
 
     await _context.Products.AddAsync(product, cancellationToken);
 
     await _context.Commit();
 
     return new AddedProductResponse(product.Id, product.Name, product.Price, product.Category, product.Unit,
-      request.Stocks, request.Images);
+      request.Stock, request.Images);
   }
 }

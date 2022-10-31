@@ -26,11 +26,10 @@ public sealed class GetProductRequestHandler
 
     var query = _context.Products
       .Include(e => e.Images.Take(1))
-      .Include(e => e.Stocks)
       .Skip(skipRecord)
       .Take(ItemPerPage)
       .Select(e => new GetProductResponse(
-        e.Id, e.Name, e.Price, e.Unit,
+        e.Id, e.Name, e.Price, e.Unit, e.Stock,
         e.Images.Select(e => e.Url))
       ).AsNoTracking()
       .AsEnumerable();

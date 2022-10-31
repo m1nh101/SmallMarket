@@ -4,15 +4,11 @@ using MediatR;
 
 namespace Market.Domain.CQRS.AddProduct;
 
-public sealed record StockPayload(
-  int Quantity,
-  string Location);
-
 public sealed record AddProductRequest(
   string Name,
   double Price,
   Category Category,
   string Unit,
-  IEnumerable<StockPayload> Stocks,
+  int Stock,
   IEnumerable<string> Images
   ) : IRequest<AddedProductResponse>;
