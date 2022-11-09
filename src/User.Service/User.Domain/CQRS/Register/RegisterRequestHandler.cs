@@ -27,6 +27,6 @@ public sealed class RegisterRequestHandler
 
     await _context.Commit();
 
-    return new RegisterResponse();
+    return new RegisterResponse(user.Id, user.Email, user.Name);
   }
 }

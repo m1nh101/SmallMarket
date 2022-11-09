@@ -8,7 +8,6 @@ public class ItemConfiguration : EntityConfiguration<Item>
 {
   public override void Configure(EntityTypeBuilder<Item> builder)
   {
-    builder.Ignore(e => e.Price);
     builder.Ignore(e => e.TotalPrice);
 
     builder.Property(e => e.ProductId).IsRequired();

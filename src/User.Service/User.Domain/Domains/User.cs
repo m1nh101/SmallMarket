@@ -39,6 +39,11 @@ public class User : Entity
   private readonly List<Card> _cards = new();
   public IReadOnlyCollection<Card> Cards => _cards.AsReadOnly();
 
+  public readonly List<Role> _roles = new();
+  public IReadOnlyCollection<Role> Roles => _roles.AsReadOnly();
+
+  public virtual ICollection<UserRole> UserRoles { get; private set; } = default!;
+
   public bool ComparePassword(string password)
   {
     var hashPassword = PasswordHashing.Hashing(password);

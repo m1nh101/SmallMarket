@@ -1,8 +1,9 @@
 ﻿using gRPC.Client;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Order.Domain.Domains;
 using Order.Domain.Interfaces;
+using Order.Domain.Specifications;
+using Specification;
 
 namespace Order.Domain.CQRS.AddItemToOrder;
 
@@ -18,18 +19,12 @@ public sealed class AddItemToOrderRequestHandler
 
   public async Task<AddItemToOrderResponse> Handle(AddItemToOrderRequest request, CancellationToken cancellationToken)
   {
-    var order = await _context.Orders
-      .Include(e => e.Items)
-      .Where(e => !e.IsCheckout)
-      .FirstOrDefaultAsync(e => e.UserId == request.UserId, cancellationToken);
+    var order = Query.Get(_context.Orders, new CurrentOrderSpecification(request.UserId));
 
     var product = await ProductgRPCClient.CheckingProduct(request.ProductId);
 
     if (!product.Exist)
       throw new NullReferenceException($"{nameof(product)} is null");
-
-    if (order == null)
-      throw new NullReferenceException($"{nameof(order)} is null");
 
     var item = new Item(product.Quantity, request.ProductId)
       .WithPrice(product.Price);

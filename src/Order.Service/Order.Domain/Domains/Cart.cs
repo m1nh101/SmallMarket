@@ -12,12 +12,12 @@ public class Cart : Entity
 {
   private Cart() { }
 
-  public Cart(string userId)
+  public Cart(int userId)
   {
     UserId = userId;
   }
 
-  public string UserId { get; private set; } = string.Empty;
+  public int UserId { get; private set; }
 
   public double Total { get; private set; }
 
@@ -36,21 +36,21 @@ public class Cart : Entity
       _items.Add(item);
       Total += item.TotalPrice;
     } else
-      Total += cartItem.Update(item.Quantity, item.Price);
+      Total += cartItem.Update(item.Quantity);
 
     return Total;
   }
 
-  public double RemoveItem(Item item)
+  public double RemoveItem(int productId)
   {
-    var cartItem = _items.FirstOrDefault(e => e.ProductId == item.ProductId);
+    var item = _items.FirstOrDefault(e => e.ProductId == productId);
 
-    if (cartItem == null)
+    if (item == null)
       throw new NullReferenceException($"{nameof(item)} cannot be null");
 
     Total -= item.TotalPrice;
 
-    _items.Remove(cartItem);
+    _items.Remove(item);
 
     return Total;
   }

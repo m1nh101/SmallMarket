@@ -12,6 +12,11 @@ public class Item : Entity
     ProductId = productId;
   }
 
+  public Item(int productId)
+  {
+    ProductId = productId;
+  }
+
   public Item WithPrice(double price)
   {
     Price = price;
@@ -34,13 +39,13 @@ public class Item : Entity
   /// <param name="price"></param>
   /// <returns>return the price value different</returns>
   /// <exception cref="ArgumentOutOfRangeException"></exception>
-  public double Update(int quantity, double price)
+  public double Update(int quantity)
   {
     if (quantity <= 0)
       throw new ArgumentOutOfRangeException($"{nameof(quantity)} cannot equal to zero or negative value");
 
-    double newTotalPrice = quantity * price;
-    double oldTotalPrice = Quantity * price;
+    double newTotalPrice = quantity * Price;
+    double oldTotalPrice = Quantity * Price;
     Quantity = quantity;
 
     return newTotalPrice - oldTotalPrice;

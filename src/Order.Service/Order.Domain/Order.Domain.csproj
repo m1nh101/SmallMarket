@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Abstractions\Service.Abstraction\Service.Abstraction.csproj" />
+    <ProjectReference Include="..\..\Abstractions\Specification\Specification.csproj" />
     <ProjectReference Include="..\..\Communicate.Service\gRPC.Client\gRPC.Client.csproj" />
   </ItemGroup>
 

@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Message.RabbitMQ\Message.RabbitMQ.csproj" />
-    <ProjectReference Include="..\..\Abstractions\Service.Abstraction\Service.Abstraction.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Service.Abstraction\Service.Abstraction.csproj" />
   </ItemGroup>
 
 </Project>
